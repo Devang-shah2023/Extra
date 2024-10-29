@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB Atlas
-const dbURI = "mongodb+srv://Devang12320:Devang111@cluster0.80fj5.mongodb.net/";
+const dbURI = "mongodb+srv://Tirth:tirth7878@cluster0.80fj5.mongodb.net/";
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define Note model

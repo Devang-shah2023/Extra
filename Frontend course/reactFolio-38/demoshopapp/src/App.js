@@ -2,8 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import Item from './components/Item';
 import ItemDate from './components/ItemDate';
+import Products from './components/Products';
+import NewProduct from './components/NewProduct';
 const App= ()=> {
-  const Products =[
+  const products =[
     {
       id:"p1",
       title:"Nirma",
@@ -29,9 +31,14 @@ const App= ()=> {
       date:new Date(2021,5,5),
     }
   ];
+  function printProductData(data){
+    console.log("first")
+    console.log(data);
+  }
   return (
     <div>
-       <Products items={products}/>
+    <NewProduct pranay= {printProductData}/>
+       <Products items={products} />
     </div>
   );
 }
