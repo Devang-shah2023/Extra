@@ -3,154 +3,209 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  // const[firstName, setFirstName]= useState("")
-  // const[lastName, setLastName]= useState("")
 
-  // console.log(firstName)
-  // console.log(lastName)
+  const[formData, setFormData] = useState({
+    firstname:"", lastName:"", email:"", country:"India", streetAddress:"", city:"", state:"", postalCode:"", comments:false, candidates:false, offers:false
+    , pushNotifications:""
+  })
 
-  // function changeFirstNameHandler(event){
+  function changeHandler(event){
+    const{name, value, checked, type}= event.target;
+    setFormData((prev)=>({...prev, [name]:type==="checbox"? checked:value}));
+  }
 
-  //   // console.log("printing first name")
-  //   // console.log(event.target.value)
+  function submitHandler(event){
+    event.preventDefault();
 
-  //   setFirstName(event.target.value);
-  // }
-
-  // function changeLastNameHandler(event){
-  //   // console.log("printing last name")
-  //   // console.log(event.target.value)
-  //   setLastName(event.target.value);
-  // }
-
-const [formData, setFormData]= useState({
-  firstName:"",
-  lastName:"",
-  email:"",
-  comments:"",
-  isVisible: true,
-  mode:"",
-  favCar:""
-
-})
-console.log(formData)
-
-function changeHandler(event){
-  const {name,value,checked,type}= event.target
-  setFormData(previousFormData=>{
-    return{
-      ...previousFormData,
-      [name]: type==="checkbox"?checked:value
-    }
-  });
-}
-
-function submitHandler(event){
-  event.preventDefault();
-  //print
-  console.log("Finally Printing the form Data:")
-  console.log(formData)
-}
-
-  return (
-    <div className="App">
+    console.log("Finally printing the value fo form Data:")
+    console.log(formData);
+  }
+  return(
+  <div className='flex flex-col items-center mt-2 '>
     <form onSubmit={submitHandler}>
-      <input 
-      type='text'
-      placeholder='first name'
-        onChange={changeHandler}
-        name='firstName'
-        value={formData.firstName}
-      />
-      <br/>
-      <br></br>
+       
+    <label htmlFor='firstName'>First Name</label>
+     <br />
+      <input type='text' 
+      name='firstName'
+      id='firstName'
+      placeholder='Devang'
+      value={formData.firstName}
+      onchange={changeHandler}
+      className='outline'/>
 
-<input 
-      type='text'
-      placeholder='last name'
-        onChange={changeHandler}
-        name='lastName'
-        value={formData.lastName}
-      />
 
-      <br/>
-      <br/>
-  <input 
-    type='email'
-    placeholder='Enter your email here'
-    onChange={changeHandler}
-    name='email'
-    value={formData.email}
-    />
-    <br/>
-    <br/>
+<br/>
+<label htmlFor='lastName'>Last Name</label>
+     <br />
+      <input type='text' 
+      name='lastname'
+      id='lastName'
+      placeholder='Shah'
+      value={formData.lastName}
+      onchange={changeHandler}
+      className='outline'/>
 
-    <textarea
-      placeholder='Enter your comments here'
+<br/>
+<label htmlFor='email'>Email Address</label>
+     <br />
+      <input type='text' 
+      name='email'
+      id='email'
+      placeholder='Devang@abcd.com'
+      value={formData.email}
       onChange={changeHandler}
-      name='comments'
-      value={formData.address}
-    />
+      className='outline'/>
 
 <br/>
-<br/>
+      <label htmlFor='country'>Country</label>
+      <select
+      name='country'
+      id='country'
+      value={formData.country}
+      onChange={changeHandler}
+      className='outline'>
+        <option>India</option>
+        <option>United States</option>
+        <option>Canada</option>
+        <option>Mexico</option>
+      </select>
 
-<input 
-  type='checkbox'
-  onChange={changeHandler}
-  name='isVisible'
-  id='isVisible'
-  checked={formData.isVisible}
-/>
-<label htmlFor='isVisible'>Am I visible</label>
+      <br/>
+<label htmlFor='streetAddress'>Street Address</label>
+     <br />
+      <input type='text' 
+      name='streetAddress'
+      id='streetAddress'
+      placeholder='B-25C'
+      value={formData.streetAddress}
+      onchange={changeHandler}
+      className='outline'/>
+
+<br/>
+<label htmlFor='city'>City</label>
+     <br />
+      <input type='text' 
+      name='city'
+      id='city'
+      placeholder='B-25C'
+      value={formData.city}
+      onchange={changeHandler}
+      className='outline'/>
+
+
+<br/>
+<label htmlFor='state'>State/Province</label>
+     <br />
+      <input type='text' 
+      name='state'
+      id='state'
+      placeholder='Gujarat'
+      value={formData.state}
+      onchange={changeHandler}
+      className='outline'/>
+
+
+<br/>
+<label htmlFor='postalCode'>Postal Code </label>
+     <br />
+      <input type='text' 
+      name='postalCode'
+      id='postalCode'
+      placeholder='360001'
+      value={formData.postalCode}
+      onchange={changeHandler}
+      className='outline'/>
+
 <br/>
 <br/>
 
 <fieldset>
-  <legend>Mode:</legend>
+  <legend>By Email</legend>
 
-  <input
-  type='radio'
-  onChange={changeHandler}
-  name='mode'
-  value="Online-Mode"
-  id="Online-Mode"
-  checked={formData.mode=='Online-Mode'}
-/>
-<label htmlFor='Online-Mode'>Online Mode</label>
-
+  
+<div className='flex'>
 <input
-  type='radio'
-  onChange={changeHandler}
-  name='mode'
-  value="Offline-Mode"
-  id="Offline-Mode"
-  checked={formData.mode=='Offline-Mode'}
-/>
-<label htmlFor='Offline-Mode'>Offline Mode</label>
+    id='comments'
+    name='comments'
+    type='checkbox'
+    checked={formData.comments}
+  />
+  <div>
+    <label htmlFor='comments'>Comments</label>
+    <p>Get notified when someone posts a comment on posting.</p>
+  </div>
+</div>
+
+<div className='flex'>
+<input
+    id='candidates'
+    name='candidates'
+    type='checkbox'
+    checked={formData.candidates}
+  />
+  <div>
+    <label htmlFor='candidates'>Candidates</label>
+    <p>Get notified when a candidate applies for a job.</p>
+  </div>
+</div>
+
+<div className='flex'>
+<input
+    id='offers'
+    name='offers'
+    type='checkbox'
+    checked={formData.offers}
+  />
+  <div>
+    <label htmlFor='offers'>Offers</label>
+    <p>Get notified when a candidate accepts or rejects an offer.</p>
+  </div>
+</div>
+  
 </fieldset>
-<br/>
-<br/>
-<label htmlFor='favCar'>Tell me your Favourite Car: </label>
-<select
-  onChange={changeHandler}
-  name='favCar'
-  id='favCar'
-  value={formData.favCar}
-  >
-  <option value="Scorpio">Scorpio</option>
-  <option value="Fortuner">Fortuner</option>
-  <option value="Defender">Defender</option>
-  <option value="Mustang">Mustang</option>
-  <option value="Maybach">Maybach</option>
-</select>
+
 <br/>
 <br/>
 
-{/* <input type='submit' value='submit'/> */}
+<fieldset>
+  <legend>Push notifications</legend>
+  <p>These are delivered via SMS to your mobile phone.</p>
 
-<button type='submit' >Submit</button>
-      
+<br/>
+  <input
+    type='radio'
+    id='pushEverything'
+    name='pushNotifications'
+    value="Everything"
+    onChange={changeHandler}
+
+  />
+  <label htmlFor='pushEverything'>Everything</label>
+  <br/>
+  <input
+    type='radio'
+    id='pushEmail'
+    name='pushNotifications'
+    value="same as email"
+    onChange={changeHandler}
+
+  />
+  <label htmlFor='pushEmail'>Same as email</label>
+  <br/>
+  <input
+    type='radio'
+    id='pushNothing'
+    name='pushNotifications'
+    value="No Push Notifications"
+    onChange={changeHandler}
+
+  />
+  <label htmlFor='pushNothing'>No Push Notifications</label>
+</fieldset>
+
+<button
+className='bg-blue-500 text-white font-bold rounded py-2 px-3'>Save</button>
 
     </form>
   </div>
